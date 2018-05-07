@@ -1,0 +1,159 @@
+Code for Inventory Bean
+***********************
+
+package jsp;
+
+public class InventoryBean {
+
+	protected int inventory_id;
+	protected int imei_no;
+	protected String phone_name;
+	protected String phone_storage;
+	protected String phone_color;
+	protected float phone_buyingprice;
+
+public void setInventoryID(int inventory_id) {this.inventory_id = inventory_id;}
+public void setImeiNo(int imei_no) {this.imei_no = imei_no;}
+public void setPhoneName(String phone_name) {this.phone_name = phone_name;}
+public void setPhoneStorage(String phone_storage) {this.phone_storage = phone_storage;}
+public void setPhoneColor(String phone_color) {this.phone_color = phone_color;}
+public void setPhoneBuyingPrice(float phone_buyingprice) {this.phone_buyingprice = phone_buyingprice;}
+
+public int getInventoryID() {return inventory_id;}
+public int getImeiNo() {return imei_no;}
+public String getPhoneName() {return phone_name;}
+public String getPhoneStorage() {return phone_storage;}
+public String getPhoneColor() {return phone_color;}
+public float getPhoneBuyingPrice() {return phone_buyingprice}
+}
+
+
+******************************************************************************************************************************************
+
+
+<html>
+  <head>
+    <title>List page parameters</title>
+  </head>
+  <body>
+    You entered the following parameters:<br />
+    <ol>
+      <%-- 'param' is an implicit object. It is a Map that maps a 'key'
+           (the parameter name) to a 'value' --%>
+      <c:forEach var="pageParameter" items="${param}">
+        <li> <c:out value="${pageParameter.key}" /> = <c:out value="${pageParameter.value}" />
+      </c:forEach>
+    </ol>
+  </body>
+</html>
+
+
+
+
+*******************************************************************************************************************************************************
+-> iterating through database output to display all of inventory
+
+
+/*
+		function submitToBean() {
+
+			var imei_no = document.getElementById("imei_no").value;
+			var phone_name = document.getElementById("phone_name").value;
+			var phone_storage = document.getElementById("phone_storage").value;
+			var phone_color = document.getElementById("phone_color").value;
+			var phone_buyingprice = document.getElementById("phone_buyingprice").value;
+			
+			
+			imei_no='${PhoneBean.imei_no}';
+			phone_name='${PhoneBean.phone_name}';
+			phone_storage='${PhoneBean.phone_storage}';
+			phone_color='${PhoneBean.phone_color}';
+			phone_buyingprice='${PhoneBean.phone_buyingprice}';
+			
+			
+*****************************************************************************************************************************************************
+function testFunction() {
+$('#firstForm').submit(function() {
+   var user = $('#userInput').val();
+   alert(user);
+});
+	*/	
+	***************************************************************************************************************************************************************
+	
+	
+-> validating inventory form
+
+function validateInventory() {
+		var imei_no = document.getElementById("imei_no").value;
+		var phone_name = document.getElementById("phone_name").value;
+		var phone_storage = document.getElementById("phone_storage").value;
+		var phone_color = document.getElementById("phone_color").value;
+		var phone_buyingprice = document.getElementById("phone_buyingprice").value;
+
+		if (imei_no.length > 15 || imei_no.length < 15) {
+			alert("Invalid IMEI: not enough digits! IMEI has about 15 digits!");
+			//form.imei_no.focus();
+			return false;
+
+		} else {
+			if (isNaN(imei_no) || isNaN(phone_buyingprice)) {
+				alert("Please enter number value in IMEI/Buying Price!");
+				//imei_no.focus();
+				//phone_buyingprice.focus();
+				return false;
+			}else{return true;}
+			if (imei_no == null || imei_no.length <= 0
+					|| phone_color.length <= 0 || phone_buyingprice.length <= 0
+					|| phone_buyingprice == null) {
+				alert("Some entries are empty!!! Please recheck your Input!");
+				return false;			
+			}else{return true;}
+			if (imei_no != null) {
+				switch (phone_name, phone_storage) {
+				case "":
+					alert("Do not leave the Phone Name/Phone Storage blank!!!");
+					return false;
+					break;
+				default:
+					return true;
+					break;
+				}
+				
+			} else{return true;}
+
+		}
+
+	};
+
+	function resetInventory() {
+		var resetForm = window
+				.confirm("Are you sure you want to reset the form?");
+		if (resetForm == true) {
+			alert("Reset Successful!!!");
+			return true;
+		} else {
+			return false;
+		}
+		;
+	};
+	
+	
+	************************************************************************************************************************************
+	
+	// Get the system date and time.
+java.util.Date utilDate = new Date();
+// Convert it to java.sql.Date
+java.sql.Date date = new java.sql.Date(utilDate.getTime());
+...
+...
+...
+PreparedStatement stmt = connection.prepareStatement(sql);
+stmt.setDate(1, date);
+
+**************************************************************************8
+<td class=small_text>Add User <a
+							href="SignUp.jsp?redirectTo= <%=redirectTo%>">Here</a>
+						</td>
+						
+<style> <%@include file="WEB-INF/bootstrap/dist/css/bootstrap.min.css"%></style>
+						
